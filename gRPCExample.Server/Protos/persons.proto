@@ -5,6 +5,7 @@ option csharp_namespace = "gRPCExample.Server.Protos";
 service FakePersonService{
     rpc GetPersonById(GetPersonRequest) returns (PersonReply);
     rpc GetPersons(PersonsFilterRequest) returns (PersonsListReply);
+    rpc CreatePerson(CreatePersonRequest) returns (PersonReply);
 }
 
 message GetPersonRequest{
@@ -21,4 +22,9 @@ message PersonsFilterRequest{
 }
 message PersonsListReply{
     repeated PersonReply Persons = 1;
+}
+
+message CreatePersonRequest{
+    string Name = 1;
+    string Email = 2;
 }

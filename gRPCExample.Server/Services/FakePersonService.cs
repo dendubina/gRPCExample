@@ -52,8 +52,6 @@ public class FakePersonService : Protos.FakePersonService.FakePersonServiceBase
     {
         var person = Persons.FirstOrDefault(x => x.Id == Guid.Parse(request.Id));
 
-        //var person = Persons[5];
-
         if (person is null)
         {
             _logger.LogDebug("Person with id {personId} not found", request.Id);
@@ -71,12 +69,24 @@ public class FakePersonService : Protos.FakePersonService.FakePersonServiceBase
         });
     }
 
-    /*public  override async Task<Person> CreatePerson(Person person)
+    public override async Task<PersonReply> CreatePerson(CreatePersonRequest request, ServerCallContext context)
     {
+        var person = new Person
+        {
+            Id = Guid.NewGuid(),
+            Name = request.Name,
+            Email = request.Email,
+        };
+
         Persons.Add(person);
 
         _logger.LogDebug("Person with id {personId} has been added", person.Id);
 
-        return await Task.FromResult(person);
-    }*/
+        return await Task.FromResult(new PersonReply
+        {
+            Id = person.Id.ToString(),
+            Name = person.Name,
+            Email = person.Email,
+        });
+    }
 }

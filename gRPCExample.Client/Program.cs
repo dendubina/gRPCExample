@@ -13,6 +13,8 @@ internal class Program
 
         GetPersons(new PersonsFilterRequest { Name = "Lester" }, client);
 
+        CreatePerson("Denis", "denis@mail.ru", client);
+
         channel.Dispose();
         Console.ReadLine();
     }
@@ -39,7 +41,22 @@ internal class Program
 
         var reply = client.GetPersonById(request);
 
-        Console.WriteLine($"{reply.Id} {reply.Name} {reply.Email}");
+        Console.WriteLine($"Found person: {reply.Id} {reply.Name} {reply.Email}");
+
+        return reply;
+    }
+
+    private static PersonReply CreatePerson(string name, string email, FakePersonService.FakePersonServiceClient client)
+    {
+        var request = new CreatePersonRequest
+        {
+            Name = name,
+            Email = email,
+        };
+
+        var reply = client.CreatePerson(request);
+
+        Console.WriteLine($"Created person: {reply.Id} {reply.Name} {reply.Email}");
 
         return reply;
     }

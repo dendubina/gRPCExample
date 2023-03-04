@@ -7,11 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    <Protobuf Include="Protos\persons.proto" GrpcServices="Server" />
+
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="bogus" Version="34.0.2" />
     <PackageReference Include="Grpc.AspNetCore" Version="2.40.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Repositories\" />
   </ItemGroup>
 
 </Project>

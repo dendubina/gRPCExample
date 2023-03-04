@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "gRPCExample.Client";
+
+service FakePersonService{
+    rpc GetPersonById(GetPersonRequest) returns (PersonReply);
+    rpc GetPersons(PersonsFilterRequest) returns (PersonsListReply);
+}
+
+message GetPersonRequest{
+    string Id = 1;
+}
+message PersonReply{
+    string Id = 1;
+    string Name = 2;
+    string Email = 3;
+}
+
+message PersonsFilterRequest{
+    optional string Name = 1;
+}
+message PersonsListReply{
+    repeated PersonReply Persons = 1;
+}
